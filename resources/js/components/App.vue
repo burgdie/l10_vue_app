@@ -1,1 +1,5 @@
-<template>Welcome to the VueJs with Laravel 10</template>
+<template>
+  <!--Inside  handling the master layout  -->
+  <h1>Hello</h1>
+  <router-view></router-view>
+</template>
