@@ -5,6 +5,9 @@
         <div class="card">
           <div class="card-header">Register</div>
           <div class="card-body">
+            <ul v-for="error in errors">
+              <li class="text-danger">{{ error }}</li>
+            </ul>
             <form @submit.prevent="register">
               <!-- Label and Input Field for Full Name -->
               <div class="mb-3">
@@ -80,6 +83,7 @@ export default {
 
   methods: {
     register() {
+      this.clearMessage();
       if (this.password != this.confirmed_password) {
         this.errors = ["Your password does not match with confirmed password"];
 
@@ -96,8 +100,12 @@ export default {
           console.log(response.data);
         })
         .catch((error) => {
-          console.log(error.response.data);
+          this.errors = Object.values(error.response.data.errors).flat();
         });
+    },
+
+    clearMessage() {
+      this.errors = "";
     },
   },
 };
