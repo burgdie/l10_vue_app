@@ -5,13 +5,14 @@
         <div class="card">
           <div class="card-header">Register</div>
           <div class="card-body">
-            <form>
+            <form @submit.prevent="register">
               <!-- Label and Input Field for Full Name -->
               <div class="mb-3">
                 <label class="form-label">Name</label>
                 <input
                   type="text"
                   class="form-control"
+                  v-model="name"
                   placeholder="Enter your Full Name"
                 />
               </div>
@@ -23,6 +24,7 @@
                 <input
                   type="email"
                   class="form-control"
+                  v-model="email"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Enter your Email"
@@ -40,6 +42,7 @@
                 <input
                   type="password"
                   class="form-control"
+                  v-model="password"
                   id="exampleInputPassword1"
                   placeholder="Enter your password"
                 />
@@ -49,19 +52,11 @@
                 <input
                   type="password"
                   class="form-control"
+                  v-model="confirmed_password"
                   placeholder="Confirm your password"
                 />
               </div>
-              <div class="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label class="form-check-label" for="exampleCheck1"
-                  >Check me out</label
-                >
-              </div>
+
               <button type="submit" class="btn btn-primary">Register</button>
             </form>
           </div>
@@ -70,3 +65,40 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+      confirmed_password: "",
+      errors: [],
+      successMsg: "",
+    };
+  },
+
+  methods: {
+    register() {
+      if (this.password != this.confirmed_password) {
+        this.errors = ["Your password does not match with confirmed password"];
+
+        return;
+      }
+      // api/register
+      axios
+        .post("api/register", {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    },
+  },
+};
+</script>
