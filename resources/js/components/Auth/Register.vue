@@ -8,6 +8,8 @@
             <ul v-for="error in errors">
               <li class="text-danger">{{ error }}</li>
             </ul>
+            <p class="text-success">{{ successMsg }}</p>
+
             <form @submit.prevent="register">
               <!-- Label and Input Field for Full Name -->
               <div class="mb-3">
@@ -97,10 +99,16 @@ export default {
           password: this.password,
         })
         .then((response) => {
-          console.log(response.data);
+          if (response.status == 201) {
+            this.successMsg = response.data.message;
+          }
         })
         .catch((error) => {
-          this.errors = Object.values(error.response.data.errors).flat();
+          if (error.response.status == 422) {
+            this.errors = Object.values(error.response.data.errors).flat();
+          } else {
+            this.errors = "Something went wrong";
+          }
         });
     },
 
