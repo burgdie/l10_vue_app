@@ -61,26 +61,28 @@ export default {
       this.clearMessage();
 
       //api/login
-      axios
-        .post("api/login", {
-          email: this.email,
-          password: this.password,
-        })
-        .then((response) => {
-          console.log(response.data);
+      axios.get("sanctum/csrf-cookie").then((response) => {
+        axios
+          .post("api/login", {
+            email: this.email,
+            password: this.password,
+          })
+          .then((response) => {
+            console.log(response.data);
 
-          if (response.status == 201) {
-            //response.data.message;
-            console.log(response.data.message);
-          }
-        })
-        .catch((error) => {
-          if (error.response.status == 422) {
-            this.errors = Object.values(error.response.data.errors).flat();
-          } else {
-            this.errors = ["Something went wrong"];
-          }
-        });
+            if (response.status == 201) {
+              //response.data.message;
+              console.log(response.data.message);
+            }
+          })
+          .catch((error) => {
+            if (error.response.status == 422) {
+              this.errors = Object.values(error.response.data.errors).flat();
+            } else {
+              this.errors = ["Something went wrong"];
+            }
+          });
+      });
     },
     clearMessage() {
       this.errors = "";
