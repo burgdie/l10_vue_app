@@ -5,10 +5,14 @@
         <div class="card">
           <div class="card-header">Register</div>
           <div class="card-body">
-            <ul v-for="error in errors">
+            <ul v-for="error in errors" v-bind:key="error">
               <li class="text-danger">{{ error }}</li>
             </ul>
-            <p class="text-success">{{ successMsg }}</p>
+
+            <div v-show="successMsg" class="alert alert-success" role="alert">
+              {{ successMsg }}
+            </div>
+            <!-- <p class="text-success">{{ successMsg }}</p> -->
 
             <form @submit.prevent="register">
               <!-- Label and Input Field for Full Name -->

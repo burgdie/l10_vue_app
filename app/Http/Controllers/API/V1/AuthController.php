@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\RegisterRequest;
+use App\Http\Requests\API\V1\Auth\LoginRequest;
 
 class AuthController extends Controller
 {
@@ -29,5 +30,10 @@ class AuthController extends Controller
             ], 401);
         }
        
+    }
+
+    public function login(LoginRequest $request){
+        
+        return $request->all();
     }
 }
