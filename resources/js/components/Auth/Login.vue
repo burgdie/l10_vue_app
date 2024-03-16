@@ -69,6 +69,8 @@ export default {
           })
           .then((response) => {
             // dispatch authentication;
+            const status = true;
+            this.$store.dispatch("checkUserAuthenticationStatus", status);
 
             this.$router.push({
               name: "dashboard",

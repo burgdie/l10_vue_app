@@ -36,4 +36,18 @@ class AuthController extends Controller
         
         return $request->all();
     }
+
+    /**
+     * 
+     */
+    public function checkUserStatus() {
+        //
+        $status = auth()->check() ? true: false;
+        console.log($status);
+        return response()->json([
+            'status' => $status
+        ], 200);
+
+        
+    }
 }

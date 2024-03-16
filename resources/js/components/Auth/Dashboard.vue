@@ -30,7 +30,7 @@ export default {
         .then((response) => {
           console.log(response);
         })
-        .error((error) => {});
+        .catch((error) => {});
     },
   },
 };

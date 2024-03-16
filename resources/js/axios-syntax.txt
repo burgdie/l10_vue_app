@@ -1,0 +1,6 @@
+ axios.get('api/autheticated')
+      .then(response =>{
+        console.log(response)
+      }).catch(error => {
+        console.log(error)
+      })
