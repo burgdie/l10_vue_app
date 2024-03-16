@@ -12,3 +12,26 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      user: Object,
+    };
+  },
+  mounted() {
+    this.getUserDetails();
+  },
+
+  methods: {
+    getUserDetails() {
+      axios
+        .get("api/user")
+        .then((response) => {
+          console.log(response);
+        })
+        .error((error) => {});
+    },
+  },
+};
+</script>

@@ -68,7 +68,11 @@ export default {
             password: this.password,
           })
           .then((response) => {
-            console.log(response.data);
+            // dispatch authentication;
+
+            this.$router.push({
+              name: "dashboard",
+            });
 
             if (response.status == 201) {
               //response.data.message;
@@ -84,6 +88,7 @@ export default {
           });
       });
     },
+
     clearMessage() {
       this.errors = "";
     },
